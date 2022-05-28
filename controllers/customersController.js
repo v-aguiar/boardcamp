@@ -38,3 +38,20 @@ export async function fetchCustomerById(req, res) {
     res.status(400).send("⚠ Could not fetch customer...");
   }
 }
+
+export async function addCustomer(req, res) {
+  const { name, cpf, phone, birthday } = req.body;
+
+  try {
+    await db.query(
+      `INSERT INTO customers 
+        (name, cpf, phone, birthday)
+        VALUES ('${name}', '${cpf}', '${phone}', '${birthday}')`
+    );
+
+    res.sendStatus(201);
+  } catch (err) {
+    console.error("⚠ Could not add customer!", err);
+    res.status(400).send("⚠ Could not add customer...");
+  }
+}
