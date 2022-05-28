@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-connectionString = process.env.DATABASE_URL;
+const connectionString = process.env.DATABASE_URL;
 
 const db = new pg.Pool({
   connectionString: connectionString,
