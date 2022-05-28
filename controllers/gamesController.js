@@ -3,7 +3,7 @@
 export async function fetchGames(req, res) {
   const name = req.query.name ? req.query.name : "";
 
-  const query = `SELECT * FROM games WHERE name LIKE '%${name}%'`;
+  const query = `SELECT * FROM games WHERE name LIKE '${name}%'`;
 
   try {
     const gamesDb = await db.query(query);
@@ -21,8 +21,7 @@ export async function addGame(req, res) {
   try {
     const { name, image, stockTotal, categoryId, pricePerDay } = req.body;
 
-    const query = 
-    `INSERT INTO games (name, image, "stockTotal", "categoryId", "pricePerDay") 
+    const query = `INSERT INTO games (name, image, "stockTotal", "categoryId", "pricePerDay") 
       VALUES ($1, $2, $3, $4, $5)
     `;
     const dependencies = [name, image, stockTotal, categoryId, pricePerDay];
@@ -35,4 +34,3 @@ export async function addGame(req, res) {
     res.status(422).send("⚠ Could not add game!");
   }
 }
-
