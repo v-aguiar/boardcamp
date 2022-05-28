@@ -40,7 +40,8 @@ export async function fetchCustomerById(req, res) {
 }
 
 export async function addCustomer(req, res) {
-  const { name, cpf, phone, birthday } = req.body;
+  const { birthday } = req.body;
+  const { name, cpf, phone } = res.locals;
 
   try {
     await db.query(
@@ -53,5 +54,25 @@ export async function addCustomer(req, res) {
   } catch (err) {
     console.error("⚠ Could not add customer!", err);
     res.status(400).send("⚠ Could not add customer...");
+  }
+}
+
+export async function updateCustomer(req, res) {
+  const { id } = req.params;
+  const { birthday } = req.body;
+  const { name, cpf, phone } = res.locals;
+
+  const query = `UPDATE customers
+    SET name = $1, cpf = $2, phone = $3, birthday = $4
+    WHERE id = $5`;
+  const values = [name, cpf, phone, birthday, id];
+
+  try {
+    await db.query(query, values);
+
+    res.sendStatus(200);
+  } catch (err) {
+    console.error("⚠ Could not update customer!", err);
+    res.status(400).send("⚠ Could not update customer...");
   }
 }
