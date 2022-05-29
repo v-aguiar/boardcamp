@@ -42,3 +42,47 @@ export async function addRental(req, res) {
     res.status(400).send("⚠ Could not add rental...");
   }
 }
+
+export async function closeRental(req, res) {
+  const { id } = req.params;
+
+  const query = `UPDATE rentals r
+    SET "returnDate" = now(),
+      "delayFee" = (
+        SELECT EXTRACT(
+          DAY FROM now() - r."rentDate"
+        ) * g."pricePerDay"
+      )
+    FROM games g
+    WHERE r.id = $1 AND g.id = r."gameId";
+  `;
+  const values = [id];
+
+  try {
+    await db.query(query, values);
+
+    res.sendStatus(200);
+  } catch (err) {
+    console.error("⚠ Could not close rental!", err);
+    res.status(400).send("⚠ Could not close rental...");
+  }
+}
+
+export async function deleteRental(req, res) {
+  const { id } = req.params;
+
+  try {
+    await db.query(
+      `
+        DELETE FROM rentals
+        WHERE id = $1
+      `,
+      [id]
+    );
+
+    res.sendStatus(200);
+  } catch (err) {
+    console.error("⚠ Could not delete rental!", err);
+    res.status(400).send("⚠ Could not delete rental...");
+  }
+}

@@ -51,12 +51,42 @@ export async function validateAddRental(req, res, next) {
     );
     const alreadyRentedLength = alreadyRentedDb.rows.length;
 
-    console.log(alreadyRentedLength);
-    console.log(alreadyRentedDb.rows);
-
     if (alreadyRentedLength >= game.stockTotal) {
       console.error("⚠ Bad request! Out of stock...");
       res.status(400).send("⚠ Bad request! Out of stock...");
+      return;
+    }
+
+    next();
+  } catch (err) {
+    console.error("⚠ Error validating rental data input!", err);
+    res.status(422).send("⚠ Error validating rental data input!");
+  }
+}
+
+export async function validateIdParamRental(req, res, next) {
+  const { id } = req.params;
+
+  try {
+    // Check if id belongs to a registered rental
+    const rentalDb = await db.query(
+      `SELECT * 
+        FROM rentals 
+        WHERE id = $1
+      `,
+      [id]
+    );
+    const rental = rentalDb.rows[0];
+    if (!rental) {
+      console.error("⚠ Not found! No rental found with given id...");
+      res.status(404).send("⚠ Not found! No rental found with given id...");
+      return;
+    }
+
+    // Check if rental is already closed
+    if (rental.returnDate !== null) {
+      console.error("⚠ Bad request! Rental already closed...");
+      res.status(400).send("⚠ Bad request! Rental already closed...");
       return;
     }
 

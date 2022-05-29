@@ -6,6 +6,7 @@
         ON c.id = $1 AND r."customerId" = c.id
         JOIN games g
         ON g.id = $2 AND r."gameId" = g.id
+        ORDER BY r.id ASC
       `;
   } else if (customerId !== 0) {
     return `SELECT r.*, to_json (c) as customer, to_json (g) as game
@@ -14,6 +15,7 @@
         ON c.id = $1 AND r."customerId" = c.id
         JOIN games g
         ON r."gameId" = g.id
+        ORDER BY r.id ASC
       `;
   } else if (gameId !== 0) {
     return `SELECT r.*, to_json (c) as customer, to_json (g) as game
@@ -22,6 +24,7 @@
         ON r."customerId" = c.id
         JOIN games g
         ON g.id = $1 AND r."gameId" = g.id
+        ORDER BY r.id ASC
       `;
   } else {
     return `SELECT r.*, to_json (c) as customer, to_json (g) as game
@@ -30,6 +33,7 @@
         ON r."customerId" = c.id
         JOIN games g
         ON r."gameId" = g.id
+        ORDER BY r.id ASC
       `;
   }
 }
