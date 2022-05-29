@@ -84,9 +84,13 @@ export async function validateIdParamRental(req, res, next) {
     }
 
     // Check if rental is already closed
-    if (rental.returnDate !== null) {
+    if (rental.returnDate !== null && req.method === "POST") {
       console.error("⚠ Bad request! Rental already closed...");
       res.status(400).send("⚠ Bad request! Rental already closed...");
+      return;
+    } else if (rental.returnDate === null && req.method === "DELETE") {
+      console.error("⚠ Bad request! Rental not yet closed...");
+      res.status(400).send("⚠ Bad request! Rental not yet closed...");
       return;
     }
 
