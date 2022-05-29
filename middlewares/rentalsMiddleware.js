@@ -29,9 +29,13 @@ export async function validateAddRental(req, res, next) {
     }
 
     // Check if gameId belongs to a registered game
-    const gameDb = await db.query(`SELECT * FROM games WHERE id = $1`, [
-      gameId,
-    ]);
+    const gameDb = await db.query(
+      `SELECT * 
+        FROM games 
+        WHERE id = $1
+      `,
+      [gameId]
+    );
     const game = gameDb.rows[0];
 
     if (!game) {
@@ -42,10 +46,13 @@ export async function validateAddRental(req, res, next) {
 
     // Check if game is out of stock
     const alreadyRentedDb = await db.query(
-      `SELECT * FROM rentals WHERE 'gameId' = $1`,
+      `SELECT * FROM rentals WHERE "gameId" = $1`,
       [gameId]
     );
     const alreadyRentedLength = alreadyRentedDb.rows.length;
+
+    console.log(alreadyRentedLength);
+    console.log(alreadyRentedDb.rows);
 
     if (alreadyRentedLength >= game.stockTotal) {
       console.error("⚠ Bad request! Out of stock...");
