@@ -7,14 +7,16 @@ import games_schema from "../schemas/games_schema.js";
 export async function validateAddGame(req, res, next) {
   const { name, image, stockTotal, categoryId, pricePerDay } = req.body;
 
-  // Joi validation
-  const validateGameData = games_schema.validate({
-    name: typeof(name) === 'string' ? stripHtml(name).result : name,
-    image: typeof(image) === 'string' ? stripHtml(image).result : image,
-    stockTotal,
-    categoryId,
-    pricePerDay
-  }, {abortEarly: false});
+  const validateGameData = games_schema.validate(
+    {
+      name: typeof name === "string" ? stripHtml(name).result : name,
+      image: typeof image === "string" ? stripHtml(image).result : image,
+      stockTotal,
+      categoryId,
+      pricePerDay,
+    },
+    { abortEarly: false }
+  );
 
   if (validateGameData.error) {
     console.error("⚠ Validation error! ", validateGameData.error.message);
@@ -24,8 +26,9 @@ export async function validateAddGame(req, res, next) {
 
   try {
     // Check if game already exists
-    const sameGame = await db.query(
-      `SELECT * FROM games WHERE name = $1`, [stripHtml(name).result]);
+    const sameGame = await db.query(`SELECT * FROM games WHERE name = $1`, [
+      stripHtml(name).result,
+    ]);
     if (sameGame.rows.length > 0) {
       res.status(409).send("⚠ Conflict! Game already registered...");
       return;
@@ -33,12 +36,13 @@ export async function validateAddGame(req, res, next) {
 
     // Check if categoryId matches any registered category
     const existingCategory = await db.query(
-      `SELECT * FROM categories WHERE id = $1`, [categoryId]);
+      `SELECT * FROM categories WHERE id = $1`,
+      [categoryId]
+    );
     if (existingCategory.rows.length === 0) {
       res.status(400).send("⚠ Bad request! Category does not exist...");
       return;
     }
-
   } catch (err) {
     console.error("⚠ Error validating game data input!", err);
     res.status(422).send("⚠ Error validating game data input!");
