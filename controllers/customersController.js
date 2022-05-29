@@ -43,12 +43,13 @@ export async function addCustomer(req, res) {
   const { birthday } = req.body;
   const { name, cpf, phone } = res.locals;
 
+  const query = `INSERT INTO customers 
+    (name, cpf, phone, birthday)
+    VALUES ($1, $2, $3, $4)`;
+  const values = [name, cpf, phone, birthday];
+
   try {
-    await db.query(
-      `INSERT INTO customers 
-        (name, cpf, phone, birthday)
-        VALUES ('${name}', '${cpf}', '${phone}', '${birthday}')`
-    );
+    await db.query(query, values);
 
     res.sendStatus(201);
   } catch (err) {
