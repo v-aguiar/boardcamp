@@ -9,7 +9,7 @@ CRUD API to manage a board game rental app.
 #
 ## About
 
-This is an CRUD api which provides and handles all data and database operations of a board game app.
+A CRUD api which provides and handles all data operations for a board game rental app.
 
 Below are the implemented endpoints:
 
@@ -39,10 +39,8 @@ The following tools and frameworks were used in the construction of the project:
 ## How to run
 
 1. Clone the front-end repository at https://github.com/bootcamp-ra/boardcamp-front
-2. Run `npm install` in the front-end repository (there might be some vulnerabilitie messages in the front-end repository)
+2. Run `npm install` in the front-end repository (there might be some vulnerability messages in the front-end repository)
 3. In the front-end repository, change the `baseURL` at the `src/services/api/api.js` to match the deployed <b>boardcamp-api</b> url: https://projeto-15-boardcamp.herokuapp.com/
-
-</br> 
 
 * <p>From localhost url:</p>
 ```javascript
