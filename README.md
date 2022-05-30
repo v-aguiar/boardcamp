@@ -1,9 +1,18 @@
-# BoardCamp Api
 
-CRUD API to manage a board game rental app. 
+<div align="center">
+    <a href="https://github.com/NivaldoFarias/boardcamp-api" >
+        <img src="https://github.com/bootcamp-ra/boardcamp-front/blob/main/src/assets/images/logo.png" alt="logo">
+    </a>    
+</div>
+                                                                                                                       
+                                                                                                                       
+<h1 align="center"> BoardCamp Api</h1>
 
-- Link to heroku deploy: https://projeto-15-boardcamp.herokuapp.com/
+<div align="center">
+    <p> CRUD API to manage a board game rental app. </p>
+</div>
 
+- Link to heroku deploy: https://projeto-15-boardcamp.herokuapp.com/</p>
 - The frontend repo for this api can be found at the link: https://github.com/bootcamp-ra/boardcamp-front
 
 #
