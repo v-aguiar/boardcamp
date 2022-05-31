@@ -13,7 +13,6 @@
 - Link to heroku deploy: https://projeto-15-boardcamp.herokuapp.com/</p>
 - The frontend repo for this api can be found at the link: https://github.com/bootcamp-ra/boardcamp-front
 
-#
 ## About
 
 A CRUD api which provides and handles all data operations for a board game rental app.
@@ -30,7 +29,6 @@ Below are the implemented endpoints:
 
 >Check section <a name="Endpoints details">Endpoint details</a> to know how to properly use each endpoint.
 
-#
 ## Technologies
 The following tools and frameworks were used in the construction of the project:<br>
 
@@ -42,7 +40,6 @@ The following tools and frameworks were used in the construction of the project:
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
 
-#
 ## How to run
 
 1. Clone the front-end repository at https://github.com/bootcamp-ra/boardcamp-front
@@ -74,9 +71,7 @@ npm run build
 6. Finally access http://localhost:3000 on your browser to start using the app
 7. Check the [Endpoint details](#endpoints-details) section in order to learn what each one of the endpoints does, and how to properly use them.
 
-#
 ## Endpoints details
-<br>
 
 ### ``` Method: GET, Route: '/games' ```
 
