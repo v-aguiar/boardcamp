@@ -1,8 +1,6 @@
 
 <div align="center">
-    <a href="https://github.com/NivaldoFarias/boardcamp-api" >
-        <img src="https://github.com/bootcamp-ra/boardcamp-front/blob/main/src/assets/images/logo.png" alt="logo">
-    </a>    
+        <img src="https://github.com/bootcamp-ra/boardcamp-front/blob/main/src/assets/images/logo.png" alt="logo"> 
 </div>
                                                                                                                        
                                                                                                                        
